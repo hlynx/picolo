@@ -1,0 +1,27 @@
+{
+    "name": "hlynx/picolo",
+    "description": "Picolo CMF",
+    "license": "GPL3",
+    "homepage": "https://github.com/hlynx/picolo",
+    "authors": [
+        {
+            "name": "Aleksey Korolyov",
+            "email": "hlynx@users.noreply.github.com"
+        }
+    ],
+    
+    "autoload": {
+        "psr-4": {
+            "Picolo\\": "app/",
+            "": "src/"
+        }
+    },
+    
+    "require": {
+        "silex/silex": "~1.2",
+        "doctrine/dbal": "~2.5",
+        "twig/twig": ">=1.8,<2.0-dev",
+        "symfony/twig-bridge": "~2.3",
+        "symfony/yaml": "~2.6"
+    }
+}

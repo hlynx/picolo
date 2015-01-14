@@ -1,0 +1,9 @@
+all:
+    routing:
+        homepage:
+            path: /
+            controller: App\Controllers\Homepage::index
+        test:
+            path: /test
+            controller: App\Controllers\Homepage::test
+            

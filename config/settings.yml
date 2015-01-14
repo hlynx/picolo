@@ -1,0 +1,14 @@
+all:
+    database:
+        driver: pdo_mysql
+        charset: utf8
+
+dev:
+    database:
+        host: localhost
+        dbname: picolo
+        user: root
+        password: 
+
+prod:
+    

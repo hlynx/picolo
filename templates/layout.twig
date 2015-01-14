@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>title</title>
+    </head>
+    <body>
+        <a href="{{ path('homepage') }}">Главная</a>
+        <a href="{{ path('test') }}">Test</a>
+        <br>
+        {% block content %}
+            Content of the page...
+        {% endblock %}
+    </body>
+</html>
