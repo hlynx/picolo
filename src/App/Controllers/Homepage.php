@@ -25,6 +25,10 @@ class Homepage {
             var_dump(get_class($e));
         }
 
+//    $sm = $app['db']->getSchemaManager();
+//    $columns = $sm->listTableColumns('category');
+//    var_dump($columns);
+
         return $app->json($items);
     }
 

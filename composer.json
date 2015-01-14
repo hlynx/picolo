@@ -1,7 +1,8 @@
 {
     "name": "hlynx/picolo",
     "description": "Picolo CMF",
-    "license": "GPL3",
+    "license": "GPL-3.0+",
+    "type": "project",
     "homepage": "https://github.com/hlynx/picolo",
     "authors": [
         {
