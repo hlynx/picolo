@@ -31,14 +31,14 @@ else {
 }
 unset($cacheFile, $configDir, $config);
 
-// Setting db
+// Configuring db
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     'db.options' => $app->getConfig('database')
 ));
 
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 
-// Setting template engine
+// Configuring template engine
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => $app->getRootDir().'templates'.DIRECTORY_SEPARATOR,
     'twig.options' => array(
@@ -47,29 +47,15 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
     ),
 ));
 
-// Setting routing
+// Configuring logger
+$app->register(new Silex\Provider\MonologServiceProvider(), array(
+    'monolog.logfile' => $app->getLogDir().$app['env'].'.log',
+    'monolog.level' => $app['debug']?\Monolog\Logger::WARNING:\Monolog\Logger::ERROR,
+    'monolog.name' => 'picolo'
+));
+
+// Configuring routing
 foreach($app->getConfig('routing') as $name=>$params)
     $app->get($params['path'], $params['controller'])->bind($name);
-
-/*
-$app->get('{url}', function($url) {
-    var_dump($url);
-});
- */
-/*
-$app->error(function (\Exception $e, $code) use ($app) {
-    if ($app['debug']) {
-        return;
-    }
-// 404.html, or 40x.html, or 4xx.html, or error.html
-    $templates = array(
-        'errors/' . $code . '.html',
-        'errors/' . substr($code, 0, 2) . 'x.html',
-        'errors/' . substr($code, 0, 1) . 'xx.html',
-        'errors/default.html',
-    );
-    return new Response($app['twig']->resolveTemplate($templates)->render(array('code' => $code)), $code);
-});
-*/
 
 return $app;

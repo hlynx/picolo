@@ -6,6 +6,7 @@ class Application extends \Silex\Application {
     private $rootDir;
 
     use \Silex\Application\TwigTrait;
+    use \Silex\Application\MonologTrait;
     
     public function getRootDir() {
         if(!$this->rootDir) {
@@ -25,22 +26,16 @@ class Application extends \Silex\Application {
         return $path;
     }
     
+    public function getLogDir() {
+        $path = $this->getRootDir().'log'.DIRECTORY_SEPARATOR;
+        if (!is_dir($path)) {
+            mkdir($path, 0777, true);
+        }
+        
+        return $path;
+    }
+    
     public function getConfig($key) {
         return $this['config'][$key]?:null;
     }
-
-
-    /**
-     * Adds a log record.
-     *
-     * @param string $message The log message
-     * @param array $context The log context
-     * @param integer $level The logging level
-     *
-     * @return Boolean Whether the record has been processed
-     */
-//    public function log($message, array $context = array(), $level = Logger::INFO) {
-//        return $this['monolog']->addRecord($level, $message, $context);
-//    }
-
 }
