@@ -15,13 +15,13 @@ $app['debug'] = $app['env'] == 'dev';
 $cacheFile = $app->getCacheDir().'config.'.$app['env'].'.php';
 if(($app['env'] == 'dev') || !file_exists($cacheFile)) {
     $configDir = $app->getRootDir().'config'.DIRECTORY_SEPARATOR;
-    $config = array_merge(
+    $config = array_merge_recursive(
         Yaml::parse($configDir.'settings.yml'),
         Yaml::parse($configDir.'routing.yml')
         // Other configs
     );
     
-    $app['config'] = array_merge((array)$config['all'], (array)$config[$app['env']]);
+    $app['config'] = array_merge_recursive((array)$config['all'], (array)$config[$app['env']]);
     
     // DANGER!!! Watch after var_export - it may cut long arrays
     file_put_contents($cacheFile, '<?php return ' . var_export($app['config'], true) . ';');
