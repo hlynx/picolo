@@ -55,7 +55,14 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
 ));
 
 // Configuring routing
-foreach($app->getConfig('routing') as $name=>$params)
-    $app->get($params['path'], $params['controller'])->bind($name);
+foreach($app->getConfig('routing') as $name=>$params) {
+    $route = $app->get($params['path'], $params['controller'])->bind($name);
+    if($params['assert']) {
+        foreach ($params['assert'] as $var => $regexp) {
+            $route->assert($var, $regexp);
+        }
+    }
+}
+unset($route);
 
 return $app;
