@@ -5,6 +5,7 @@ namespace Picolo;
 class Application extends \Silex\Application {
     private $rootDir;
 
+    use \Silex\Application\UrlGeneratorTrait;
     use \Silex\Application\TwigTrait;
     use \Silex\Application\MonologTrait;
     
